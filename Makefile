@@ -1,6 +1,10 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
-LDFLAGS =
+ifeq ($(OS),Windows_NT)
+    LDFLAGS = -static
+else
+    LDFLAGS =
+endif
 
 ifeq ($(OS),Windows_NT)
     TARGET = shadowcrypt.exe

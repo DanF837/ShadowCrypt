@@ -1,0 +1,68 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'V*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            name: windows
+            artifact: shadowcrypt.exe
+            make: mingw32-make
+          - os: ubuntu-latest
+            name: linux
+            artifact: shadowcrypt
+            make: make
+          - os: macos-latest
+            name: macos
+            artifact: shadowcrypt
+            make: make
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: ${{ matrix.make }}
+
+      - name: Rename artifact
+        shell: bash
+        run: |
+          if [ "${{ matrix.name }}" = "windows" ]; then
+            mv shadowcrypt.exe shadowcrypt-${{ matrix.name }}.exe
+          else
+            mv shadowcrypt shadowcrypt-${{ matrix.name }}
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shadowcrypt-${{ matrix.name }}
+          path: shadowcrypt-${{ matrix.name }}*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            shadowcrypt-windows.exe
+            shadowcrypt-linux
+            shadowcrypt-macos
