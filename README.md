@@ -78,7 +78,7 @@ Descend through 8 floors of a dungeon across 3 biomes, fighting enemies, collect
 - **Enemy Abilities** - Necromancers summon skeletons, Liches raise undead and teleport, Dragons enrage
 - **Death Recap** - Detailed stats screen showing kills, damage, equipment on death
 - **Message Log** - Scroll through your full message history
-- **Colored Messages** - Combat, healing, gold, and status messages color-coded for quick scanning
+- **Coloured Messages** - Combat, healing, gold, and status messages colour-coded for quick scanning
 - **Enemy HP Display** - Visible enemies shown with HP in the HUD
 - **Equipment Comparison** - See stat differences when picking up or examining gear
 - **Wait/Rest** - Press T to skip your turn and let enemies come to you
