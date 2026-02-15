@@ -1,4 +1,5 @@
 #include "Item.h"
+#include <algorithm>
 #include <cstdlib>
 
 static std::string enchantmentPrefix(Enchantment e) {

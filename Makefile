@@ -8,9 +8,6 @@ endif
 
 ifeq ($(OS),Windows_NT)
     TARGET = shadowcrypt.exe
-    export TMPDIR = $(HOME)/tmp
-    export TMP = $(HOME)/tmp
-    export TEMP = $(HOME)/tmp
 else
     TARGET = shadowcrypt
 endif
